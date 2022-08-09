@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/x-icon" href="./img/random.ico">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header>Random Quotes Using API</header>
+        <section class="quotes">
+          <div class="quote-text" id="js-quote-text">
+            Click on the button below to generate a random quote.
+          </div>
+          <div class="author-name" id="js-author-name"></div>
+        </section>
+        <section class="controls">
+          <button type="button" id="js-new-quote" class="new-quote button">
+            Generate a new quote
+          </button>
+        </section>
+    </div>
+
+
+
+    <script>
+        const spinner = document.querySelector('#js-spinner');
+
+
+        const newQuoteButton = document.querySelector("#js-new-quote");
+        newQuoteButton.addEventListener('click', getQuote, false);
+
+        async function getQuote(){
+            try {
+                const response = await fetch("https://type.fit/api/quotes");  
+                if(!response.ok){
+                    throw Error(response.statusText);
+                }
+
+                const json = await response.json();
+                const index = parseInt(Math.random() * 10);
+                displayQuote(json[index].text);
+                displayAuthor(json[index].author);
+            } catch (error) {
+                console.log(error);
+                alert('Failed To fetch API');
+            } 
+
+        }
+
+        function displayQuote(quote){
+            const quoteText = document.querySelector("#js-quote-text");
+            quoteText.innerHTML = `<span>"${quote}"</span>`;
+        }
+
+        function displayAuthor(name){
+            const authorName = document.querySelector("#js-author-name");
+            authorName.innerHTML = `<span>- ${name}</span>`;
+        }
+    </script>
+</body>
+</html>
