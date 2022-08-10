@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bbb{
+            background-color: black;
+            color: white;
+        }
+        .aaa{
+            background-color: aqua;
+        }
+        
+        .ccc{
+            font-size: larger;
+        }
+    </style>
+</head>
+<body>
+    <div class="aaa www eee" id="a">Hello</div>
+    <div class="aaa ccc" id="a">World!!</div>
+    <div class="ccc">Hello World!</div>
+    <div class="bbb">Hello Again!</div>
+
+
+    <script>
+        var x = document.querySelectorAll(".aaa");
+        for (i=0;i< x.length; i++){
+            if(x[i].classList.contains('aaa')){
+                x[i].classList.remove('aaa');
+                x[i].classList.toggle('bbb');
+            }
+            
+        }    
+    </script>
+</body>
+</html>
